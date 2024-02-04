@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="login__section section--padding">
+        <div class="container">
+            <div class="login__section--inner">
+
+                <form method="post" class="account__login">
+                    {% csrf_token %}
+                    <div class="account__login--header mb-25">
+                        <h3 class="account__login--header__title mb-10">Авторизация</h3>
+                        <p class="account__login--header__desc">Войдите если Вы постоянный клиент</p>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        <div class="mb-3" style="color: var(--bs-red)">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+
+
+                    <div class="account__login--inner">
+                        {% if form.username.errors %}
+                            <div class="my-3" style="color: var(--bs-red)">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+                        <label for="{{ form.username.id_for_label }}">
+                            {{ form.username }}
+                        </label>
+
+
+                        {% if form.password.errors %}
+                            <div class="my-3" style="color: var(--bs-red)">
+                                {{ form.password.errors }}
+                            </div>
+                        {% endif %}
+
+                        <label for="{{ form.password.id_for_label }}">
+                            {{ form.password }}
+                        </label>
+
+                        <button class="account__login--btn primary__btn" type="submit">Войти</button>
+                    </div>
+
+                    <div class="mt-3" style="display: flex; justify-content: center">
+                        <a href="{% url 'appauth:registration' %}">Нет аккаунта? Зарегестрируйтесь!</a>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
